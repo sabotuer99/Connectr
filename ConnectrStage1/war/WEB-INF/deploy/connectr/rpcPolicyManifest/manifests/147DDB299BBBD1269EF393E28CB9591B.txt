@@ -1,0 +1,2 @@
+serviceClass: com.metadot.book.connectr.client.FriendsService
+path: D1C366479050E5FB39CCCFBB20C31201.gwt.rpc

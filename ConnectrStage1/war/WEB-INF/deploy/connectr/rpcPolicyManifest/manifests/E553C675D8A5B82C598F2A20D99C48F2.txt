@@ -1,0 +1,2 @@
+serviceClass: com.metadot.book.connectr.client.UserAccountService
+path: 62F674FAA760899DEDF521EFE16DC8F0.gwt.rpc

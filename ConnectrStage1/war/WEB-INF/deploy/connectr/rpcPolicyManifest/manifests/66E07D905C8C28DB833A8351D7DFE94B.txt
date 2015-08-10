@@ -1,0 +1,2 @@
+serviceClass: com.metadot.book.connectr.client.MessagesService
+path: FC1050855EBC88977E01554CEC14F1B8.gwt.rpc
