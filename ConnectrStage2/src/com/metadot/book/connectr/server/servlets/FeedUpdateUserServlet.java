@@ -34,9 +34,9 @@ import com.metadot.book.connectr.server.domain.UserAccount;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import com.google.appengine.api.labs.taskqueue.Queue;
-import com.google.appengine.api.labs.taskqueue.QueueFactory;
-import static com.google.appengine.api.labs.taskqueue.TaskOptions.Builder.*;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import static com.google.appengine.api.taskqueue.TaskOptions.Builder.*;
 
 
 @SuppressWarnings("serial")
@@ -92,7 +92,7 @@ public class FeedUpdateUserServlet extends HttpServlet {
         Queue queue = QueueFactory.getDefaultQueue();
         for (Friend fr : friends ){
           // spawn off tasks to fetch the Friend-associated urls
-          queue.add(url("/feedupdatefr").param("fkey", fr.getId()));
+          queue.add(withUrl("/feedupdatefr").param("fkey", fr.getId()));
           logger.fine("queueing for " + fr.getId());
         }
       }

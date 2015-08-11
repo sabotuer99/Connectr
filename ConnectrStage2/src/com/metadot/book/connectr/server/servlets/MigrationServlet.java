@@ -29,10 +29,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import com.google.appengine.api.labs.taskqueue.Queue;
-import com.google.appengine.api.labs.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.datastore.DatastoreTimeoutException;
-import com.google.appengine.api.labs.taskqueue.TaskOptions;
+import com.google.appengine.api.taskqueue.TaskOptions;
 
 
 import com.metadot.book.connectr.server.migrations.Migration;
@@ -109,7 +109,7 @@ public class MigrationServlet extends HttpServlet {
       }
       if (cursor != null) {
         Queue queue = QueueFactory.getDefaultQueue();
-        TaskOptions topt = TaskOptions.Builder.url("/migration");
+        TaskOptions topt = TaskOptions.Builder.withUrl("/migration");
         for (String rkey : res.keySet()) {
           if (!rkey.equals("cursor")) {
             topt = topt.param(rkey, ""+ res.get(rkey));

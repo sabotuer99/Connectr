@@ -19,7 +19,8 @@
 package com.metadot.book.connectr.server.servlets;
 
 
-import static com.google.appengine.api.labs.taskqueue.TaskOptions.Builder.url;
+import static com.google.appengine.api.taskqueue.TaskOptions.Builder.withUrl;
+
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,8 +37,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.datanucleus.store.appengine.query.JDOCursorHelper;
 
 import com.google.appengine.api.datastore.Cursor;
-import com.google.appengine.api.labs.taskqueue.Queue;
-import com.google.appengine.api.labs.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
 import com.metadot.book.connectr.server.PMF;
 import com.metadot.book.connectr.server.domain.FeedInfo;
 
@@ -110,7 +111,7 @@ public class FeedUpdateServlet extends HttpServlet {
         Cursor cursor = JDOCursorHelper.getCursor(results);
         cursorString = cursor.toWebSafeString();
         Queue queue = QueueFactory.getDefaultQueue();
-        queue.add(url("/feedupdate").param("cursor", cursorString).param("num", 
+        queue.add(withUrl("/feedupdate").param("cursor", cursorString).param("num", 
           ""+batch).param("max", ""+max).param("bc", ""+batchcount));
           
         for (FeedInfo f : results) {

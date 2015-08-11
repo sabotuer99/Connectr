@@ -18,7 +18,7 @@
  */
 package com.metadot.book.connectr.server;
 
-import static com.google.appengine.api.labs.taskqueue.TaskOptions.Builder.url;
+import static com.google.appengine.api.taskqueue.TaskOptions.Builder.withUrl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,9 +31,9 @@ import java.util.logging.Logger;
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.HttpSession;
 
-import com.google.appengine.api.labs.taskqueue.Queue;
-import com.google.appengine.api.labs.taskqueue.QueueFactory;
-import com.google.appengine.api.labs.taskqueue.TaskOptions;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.metadot.book.connectr.client.service.FriendsService;
 import com.metadot.book.connectr.server.AppMisc;
@@ -96,7 +96,7 @@ FriendsService {
           byte[] data = Utils.serialize(hm);
 
           Queue queue = QueueFactory.getDefaultQueue();
-          queue.add(url("/updatefeedurls").payload(data,
+          queue.add(withUrl("/updatefeedurls").payload(data,
             "application/x-java-serialized-object"));
         }
     } 
@@ -135,7 +135,7 @@ FriendsService {
           hm.put("fid", fid);
           byte[] data = Utils.serialize(hm);
           Queue queue = QueueFactory.getDefaultQueue();
-          queue.add(url("/updatefeedurls").payload(data,
+          queue.add(withUrl("/updatefeedurls").payload(data,
             "application/x-java-serialized-object"));
         }
     } 
@@ -174,7 +174,7 @@ FriendsService {
           pm.deletePersistent(friend);
 
           Queue queue = QueueFactory.getDefaultQueue();
-          queue.add(url("/updatefeedurls").payload(data,
+          queue.add(withUrl("/updatefeedurls").payload(data,
           "application/x-java-serialized-object"));
         }
     } 
@@ -214,7 +214,7 @@ FriendsService {
   }
 
   public static TaskOptions getTaskOptions() {
-      return url("/tasks/deferred");
+      return withUrl("/tasks/deferred");
   }
   
   public FriendDTO getFriend(String id) {

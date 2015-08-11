@@ -40,7 +40,7 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.google.appengine.api.labs.taskqueue.QueueFailureException;
+import com.google.appengine.api.taskqueue.QueueFailureException;
 
 
 public class Utils {
